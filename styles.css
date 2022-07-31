@@ -65,6 +65,18 @@ svg text.legend{
 h3 { white-space: nowrap; } 
 p { white-space: nowrap; } 
 li { white-space: nowrap; } 
+
+.icon {
+    font-size: larger;
+        color: #ffffff;
+        padding-right: 10px;
+        border: solid 1px #BB2244;
+        border-radius: 16px;
+        padding-left: 10px;
+        margin-right: 10px;
+        background-color: #E8336D;
+    }
+    
 .para {
     position: absolute;
     left: 1000px;
