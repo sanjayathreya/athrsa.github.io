@@ -141,8 +141,7 @@ const render2 = (data, scene) => {
             document.getElementById('cycle1').style.display = "none";
             document.getElementById('cycle2').style.display = "none";
             document.getElementById('cycle3').style.display = "none";
-            document.getElementById('cycle4').style.display = "none";  
-            
+            document.getElementById('cycle4').style.display = "none";
             break;
         default:
             document.getElementById('cycle1').style.display = "";
@@ -151,13 +150,6 @@ const render2 = (data, scene) => {
             document.getElementById('cycle4').style.display = "";
             document.getElementById('cycle5').style.display = "";
         }
-    
-    
-
 };
 
-function select(scene) {
-    console.log(dataset);
-    render2(dataset, scene);
-}
 

@@ -71,7 +71,7 @@ const render = () => {
     .attr("transform", `translate(${margin.left},${margin.top})`)
     .on("pointerenter", pointerentered)
     .on("pointermove", pointermoved)
-    .on("pointerleave", pointerleft) // moves the 'group' element to the top left margin
+    //.on("pointerleave", pointerleft)
     .on("click",(d) => (render2(data,selection) ))
     .on("touchstart", event => event.preventDefault());
 
@@ -207,7 +207,7 @@ const render = () => {
         subject: { text: "B" }
         },
         {
-        note: { label: "2018 Halving ATH" },
+        note: { label: "2018 Retail ATH" },
         subject: { text: "C" }
         },
         {
@@ -315,11 +315,10 @@ const render = () => {
         dot.attr("display", null);
     }
 
-    function pointerleft() {
-        path.style("stroke", null).style("stroke-width", null);
-        dot.attr("display", "none");
-    }
-
+//    function pointerleft() {
+//       path.style("stroke", null).style("stroke-width", null);
+//       dot.attr("display", "none");
+//    }
 };
 
 d3.csv('price-formatted.csv').then(data => {
@@ -338,4 +337,11 @@ d3.csv('price-formatted.csv').then(data => {
     render();
     render2(data, 0)
 });
+
+function select(scene) {
+    //dot.attr("display", "none");
+    console.log(dataset);
+    render2(dataset, scene);
+}
+
 

@@ -7,7 +7,7 @@ h1 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-    font-family:cursive;
+    font-family: calibri;
     text-align-last: left;
 }
 
@@ -23,7 +23,7 @@ svg .annotation.badge .annotation-subject path{
 
 svg text.legend{
     text-anchor: start;
-    font-family:cursive;
+    font-family:calibri;
     fill: #E8336D
 }
 
@@ -87,7 +87,7 @@ li { white-space: nowrap; }
     padding-top: 10px;
     padding-right: 700px;
     white-space: normal; 
-    font-family:cursive;
+    font-family:calibri;
     display: none;
 }
 
@@ -115,7 +115,7 @@ li { white-space: nowrap; }
 
 .axislabel{
     font-weight: bold;
-    font-family:cursive;
+    font-family:calibri;
 }
 
 .title {
@@ -124,7 +124,7 @@ li { white-space: nowrap; }
     font-style:normal;
     font-stretch: wider;
     font-optical-sizing:initial;
-    font-family:cursive;
+    font-family:calibri;
   }
 
 .info {
@@ -133,7 +133,7 @@ li { white-space: nowrap; }
     font-style:normal;
     font-stretch: wider;
     font-optical-sizing:initial;
-    font-family:cursive;
+    font-family:calibri;
   }
 
 .button {
