@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src='https://d3js.org/d3.v6.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.js'></script>
+</head>
+<body>
+    <h1>Bitcoin boom-bust cycles</h1>
+    <!-- Create a div where the graph will take place -->
+    <!-- Add 2 buttons -->
+
+    <div id="container">
+        <div id="plot1" align="left"></div>
+        <div id="image" align="right">
+            <img src="images/BitcoinImage.PNG" alt="Bitcoin">
+        </div>
+        <div class="para" id="cycle1">
+            <h3>2012 drawdown All Time high</h3>
+            <p>
+                The first crash of bitcoin took place in 2012
+                <ul> 
+                    <li>In February of 2011, BTC reached $1.00</li> 
+                    <li>Bitcoin had risen 100x to  $30 from starting price of about $0.30.</li>
+                    <li>By end of year, the price of Bitcoin was under $5-no one can say why</li>
+                    <li>Litecoin, a fork of the Bitcoin blockchain was launched</li>
+                    <li>In 2012, of course, Bitcoin saw its first halving</li>
+                    <li>From a 50-coin reward for mining BTC to 25 coins.</li>
+                    <li>Set the stage for incredible growth</li>
+                </ul>
+            </p>
+        </div>
+        <div class="para" id="cycle2" align="right">
+            <h3>2016 drawdown All Time high</h3>
+            <p>
+                In 2013, bitcoin had a decisive bull run ending December at over $1000 over 1000x.
+                <ul> 
+                    <li>Cryptocurrencies quietly expanded in this period.</li> 
+                    <li>In terms of price bitcoin plunged to $200.</li>
+                    <li>It held steady there between $200 and $400.</li>
+                    <li>Proof of stake mining emerged as an alternative to Proof of work.</li>
+                    <li>One year after having, a retail frenzy propelled BTC</li>
+                </ul>
+            </p>
+        </div>
+        <div class="para" id="cycle3" align="right">
+            <h3>2018 drawdown All Time high</h3>
+            <p>
+                BTC went mainstream in 2017 drawing a lot of coverage.
+                <ul> 
+                    <li>BTC touched $20,000 in late 2017</li> 
+                    <li>A lot of variying opinions started being discussed.</li>
+                    <li>It was the greatest thing ever or the greatest scam.</li>
+                    <li>This period also saw the rise of multiple alt-coins.</li>
+                    <li>Soon after the parabolic rise, emerged another crypto winter in 2018-2019.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="para" id="cycle4" align="right">
+            <h3>2020 drawdown All Time high</h3>
+            <p>
+                The third bitcoin halving and pandemic saw an incredible rally.
+                <ul> 
+                    <li>With millions at home, online speculation grew in popularity.</li>
+                    <li>Meme investing along with celebrity tweeting such is Elon musk egged on rally.</li>
+                    <li>Bitcoin saw another meteoric rise in 2020 to over $60,000 in 2021.</li>
+                    <li>While it felt like bubble popped in 2021, BTC made a epic comeback in 45 days.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="para" id="cycle5" align="right">
+            <h3>Today</h3>
+            <p>
+                Inflationary fears and Fed rate hikes saw a >50% collapse again in BTC.
+                <ul> 
+                    <li>Toward end of 2021, BTC hashrate factor plummeted.</li> 
+                    <li>China partly shutdown its mining operations due to power consumption.</li>
+                    <li>This period saw a massive rally in commodity and energy sector.</li>
+                    <li>As Fed stoked inflationry fears, tech sector and speculative assets sold off.</li>
+                    <li>As of July 24,2022 BTC was priced around $20,000.</li>
+                </ul>
+            </p>
+            <p>Will bitcoin go to the moon? Remains to be seen...</p>
+        </div>
+        <div id="plot2" align="left">
+            <button class="button" onclick="select('0')">Reset</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+var dataset;
+
+// parse the date / time
+var parseTime = d3.timeParse("%d-%b-%y");
+
+const color = "steelblue"; // stroke color of line
+const strokeLinecap = "round"; // stroke line cap of the line
+const strokeLinejoin = "round"; // stroke line join of the line
+const strokeWidth = 1.5; // stroke width of line, in pixels
+const strokeOpacity = 1; // stroke opacity of line
+
+
+
+const render = () => {
+
+    tokeep = ["1", "2", "3", "4", "5"]
+
+    // filter the data according to value
+    data = dataset.filter(function(d,i){ return tokeep.indexOf(d.Scene) >= 0 });
+    console.log(data);
+    console.log(d3.max(data, function(d) { return d.days_scene_idx; }))
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 50, right: 20, bottom: 40, left: 70},
+    width = 960 - margin.left - margin.right,
+    height = 450 - margin.top - margin.bottom;
+
+    // Add svg
+    var svg = d3.select("#plot1")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g") //appends a 'group' element to 'svg'
+    .attr("transform", `translate(${margin.left},${margin.top})`)
+    .on("pointerenter", pointerentered)
+    .on("pointermove", pointermoved)
+    .on("pointerleave", pointerleft) // moves the 'group' element to the top left margin
+    .on("touchstart", event => event.preventDefault());
+
+    // Add Title element to svg
+    svg.append('g')
+        .attr("transform", `translate(0,0)`)
+        .append("text")
+        .attr("class", "title")
+        .attr("x", width / 2)
+        .attr("y", 0 )
+        .attr("text-anchor", "middle")
+        .text("Bitcoin All time high cycles")
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Create Axis definitions
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // x axis Create scale
+    var xscale = d3.scaleLinear()
+        .domain([0,d3.max(data, function(d) { return d.days_scene_idx; })])
+        .range([0, width]);
+
+    // initialize xaxis
+    var xAxis = d3.axisBottom().scale(xscale);
+    
+    // create a group element move axis to right place and give it a class name
+    svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .attr("class","myXaxis")
+
+    // y axis Create scale    
+    var yscale = d3.scaleLinear()
+        .domain([d3.min(data, function(d) { return d.MaxDrawdown; }), 0])
+        .range([height, 0]);
+
+    // initialize xaxis   
+    var yAxis = d3.axisLeft().scale(yscale).ticks(height / 30).tickFormat(d3.format('~%')) 
+    // create a group element move axis to right place and give it a class name 
+    svg.append("g")
+        .attr("class","myYaxis")
+
+    // Add the x Axis
+    svg.selectAll(".myXaxis") 
+        .call(xAxis); 
+
+    // Add the y Axis
+    svg.selectAll(".myYaxis")
+        .call(yAxis);
+
+    // add the Y gridlines
+    const yAxisGrid = d3.axisLeft(yscale).tickSize(-width).tickFormat('').ticks(20);
+    svg.append('g')
+        .attr('class', 'y axis-grid')
+        .call(yAxisGrid);
+
+    // Add X axis label:
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height + margin.bottom -10 )
+        .text("Number of days");
+
+    // Y axis label:
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left+30)
+        .attr("x", -margin.top)
+        .text("Drawdown %")
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // Group the entries by scenes
+    dataNest = Array.from(
+	    d3.group(data, d => d.Scene), ([key, value]) => ({key, value})
+	  );
+    dataNestnew = d3.group(data, d => d.Scene);
+    console.log(dataNestnew); 
+
+    // define the line
+    var valueline = d3.line()
+        .x(function(d) { return xscale(d.days_scene_idx); })
+        .y(function(d) { return yscale(d.drawdown); });
+
+    const path = svg.append("g")
+        .attr("fill", "none")
+        .attr("stroke", color)
+        .attr("stroke-linecap", strokeLinecap)
+        .attr("stroke-linejoin", strokeLinejoin)
+        .attr("stroke-width", strokeWidth)
+        .attr("stroke-opacity", strokeOpacity)
+      .selectAll("path")
+      .data(d3.group(data, d => d.Scene))
+      .join("path")
+        //.style("mix-blend-mode", "multiply")
+        .attr("d", ([, value]) => valueline(value))
+        .attr('class',([key,])  => {"line"+key;});
+ 
+
+    const dot = svg.append("g")
+        .attr("display", "none");
+  
+    dot.append("circle")
+        .attr("r", 2.5);
+  
+    dot.append("text")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .attr("text-anchor", "middle")
+        .attr("y", -8);
+
+
+    function pointermoved(event) {
+        const [xm, ym] = d3.pointer(event);
+        console.log([xm, ym]);
+        console.log("data",data);
+        const i = d3.least(data, d => Math.hypot(xscale(d.days_scene_idx) - xm, yscale(d.drawdown) - ym));
+        //var filldata =  data.filter( d,i => (d.Scene == i.Scene) );
+        //console.log("filldata",filldata);
+        console.log("zselected",(i.Scene));
+        console.log(path.data);
+        //(dataNest) => [i] === i.scene ? null : "#ddd")
+        data
+        out = (dataNest, d) => filter(i.Scene == d.key);
+   
+        path.style("stroke", (data,z) => z.Scene == i.Scene ? null : "green").filter((data,z) => z.Scene === i.Scene).raise();
+        //dot.attr("transform", `translate(${xscale(days_scene_idx)},${yscale(drawdown)})`);
+        //if (T) dot.select("text").text(T[i]);
+        //svg.property("value", O[i]).dispatch("input", {bubbles: true});
+    }
+
+    function pointerentered() {
+        path.style("mix-blend-mode", null).style("stroke", "#ddd");
+        dot.attr("display", null);
+    }
+
+    function pointerleft() {
+        path.style("mix-blend-mode", "multiply").style("stroke", null);
+        dot.attr("display", "none");
+        //svg.node().value = null;
+        //svg.dispatch("input", {bubbles: true});
+    }
+
+};
+
+d3.csv('price-formatted.csv').then(data => {
+    data.forEach(d => {
+        d.Days = + d.Days;
+        d.market_price = + d.market_price;
+        d.max_peaks_idx = + d.max_peaks_idx;
+        d.drawdown = +d.drawdown;
+        d.MaxDrawdown = +d.MaxDrawdown;
+        d.days_scene_idx = +d.days_scene_idx;
+        d.Timestamp = parseTime(d.Timestamp);
+    });
+
+    console.log(data);
+    dataset = data;
+    render();
+});
+
