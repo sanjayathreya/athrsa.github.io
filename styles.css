@@ -128,9 +128,9 @@ li { white-space: nowrap; }
   }
 
 .info {
-    font-size:small;
-    font-weight:normal;
-    font-style:normal;
+    font-size:medium;
+    font-weight:bold;
+    font-style:italic;
     font-stretch: wider;
     font-optical-sizing:initial;
     font-family:calibri;
@@ -140,7 +140,7 @@ li { white-space: nowrap; }
     transition-duration: 0.4s;
     background-color: rgb(231, 234, 240);
     border-radius: 2px;
-    border: 0.5px solid #0e99f05f; /* Green */
+    border: 0.5px solid #0e99f05f;
     border-radius: 20%;
     font-weight: bold;
     position: absolute;
@@ -149,5 +149,5 @@ li { white-space: nowrap; }
   }
   
 .button:hover {
-    background-color: #6f83e4; /* Green */
+    background-color: #6d82e9; 
   }

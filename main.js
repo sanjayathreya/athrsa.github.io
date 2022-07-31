@@ -71,7 +71,7 @@ const render = () => {
     .attr("transform", `translate(${margin.left},${margin.top})`)
     .on("pointerenter", pointerentered)
     .on("pointermove", pointermoved)
-    //.on("pointerleave", pointerleft)
+    .on("pointerleave", pointerleft)
     .on("click",(d) => (render2(data,selection) ))
     .on("touchstart", event => event.preventDefault());
 
@@ -199,19 +199,19 @@ const render = () => {
 
     //annotations for legend
     const annotationsLegend = [{
-        note: { label: "2012 Halving ATH" },
+        note: { label: "2012 Selloff-ATH" },
         subject: { text: "A" }
         },
         {
-        note: { label: "2016 Halving ATH" },
+        note: { label: "2016 Selloff-ATH" },
         subject: { text: "B" }
         },
         {
-        note: { label: "2018 Retail ATH" },
+        note: { label: "2018 Selloff-ATH" },
         subject: { text: "C" }
         },
         {
-        note: { label: "2020 Halving ATH" },
+        note: { label: "2020 Selloff-ATH" },
         subject: { text: "D" }
         },
         {
@@ -253,10 +253,12 @@ const render = () => {
     // Append Circle and annotations to 
     const dot = svg.append("g")
         .attr("display", "none")
+        .attr("class", "dot")
   
     dot.append("circle")
         .attr("r", 5.5)
-        .attr('fill','red');
+        .attr('fill','red')
+        .attr("class", "dot-circle");
   
     dot.append("text")
         .attr("font-family", "cursive")
@@ -315,10 +317,10 @@ const render = () => {
         dot.attr("display", null);
     }
 
-//    function pointerleft() {
+    function pointerleft() {
 //       path.style("stroke", null).style("stroke-width", null);
-//       dot.attr("display", "none");
-//    }
+       dot.attr("display", "none");
+    }
 };
 
 d3.csv('price-formatted.csv').then(data => {
@@ -340,6 +342,10 @@ d3.csv('price-formatted.csv').then(data => {
 
 function select(scene) {
     //dot.attr("display", "none");
+    path = d3.selectAll("g").selectAll("path")
+    path.style("stroke", null).style("stroke-width", null);
+    dot = d3.selectAll("g").selectAll("dot")
+    dot.attr("display", "none");
     console.log(dataset);
     render2(dataset, scene);
 }
